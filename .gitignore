@@ -1,0 +1,15 @@
+target
+target-eclipse
+.classpath
+
+.project
+
+.settings/org.eclipse.core.resources.prefs
+
+.settings/org.eclipse.jdt.groovy.core.prefs
+
+.settings/org.eclipse.wst.common.project.facet.core.xml
+
+.settings/org.grails.ide.eclipse.core.prefs
+
+.settings/org.codehaus.groovy.eclipse.preferences.prefs
