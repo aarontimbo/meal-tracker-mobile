@@ -3,7 +3,7 @@ package com.atimbo.meal
 import org.springframework.dao.DataIntegrityViolationException
 
 class IngredientController {
-
+	def debug = true
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -15,17 +15,25 @@ class IngredientController {
         [ingredientInstanceList: Ingredient.list(params), ingredientInstanceTotal: Ingredient.count()]
     }
 
+	def list() {
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		[ingredientInstanceList: Ingredient.list(params), ingredientInstanceTotal: Ingredient.count()]
+	}
+
     def create() {
         [ingredientInstance: new Ingredient(params)]
     }
 
     def save() {
+		if (debug) { println "Creating Ingredient with params::$params" }
         def ingredientInstance = new Ingredient(params)
         if (!ingredientInstance.save(flush: true)) {
+			if (debug) { println "Error saving Ingredient with params::$params" }
             render(view: "create", model: [ingredientInstance: ingredientInstance])
             return
         }
 
+		if (debug) { println "Ingredient saved successfully!" }
 		flash.message = message(code: 'default.created.message', args: [message(code: 'ingredient.label', default: 'Ingredient'), ingredientInstance.id])
         redirect(action: "show", id: ingredientInstance.id)
     }

@@ -8,22 +8,32 @@ import grails.test.mixin.*
 @TestFor(IngredientController)
 @Mock(Ingredient)
 class IngredientControllerTests {
-
+	def debug = true
 
     def populateValidParams(params) {
       assert params != null
-      // TODO: Populate valid properties like...
+      // Populate valid properties like...
       //params["name"] = 'someValidName'
+	  params["foodWeight"] = null		// clear foodWeight so we don't have to create a new object
+	  params["description"] = '1/2 tsp cumin'
     }
 
+	def populateInValidParams(params) {
+		assert params != null
+		// TODO: Populate valid properties like...
+		//params["name"] = 'someValidName'
+		params["foodWeight"] = 'bogus'
+	  }
+  
     void testIndex() {
         controller.index()
-        assert "/ingredient/list" == response.redirectedUrl
+        //assert "/ingredient/list" == response.redirectedUrl
+        assert "/ingredient/listMobile" == response.redirectedUrl
     }
 
     void testList() {
 
-        def model = controller.list()
+        def model = controller.listMobile()
 
         assert model.ingredientInstanceList.size() == 0
         assert model.ingredientInstanceTotal == 0
@@ -36,9 +46,16 @@ class IngredientControllerTests {
     }
 
     void testSave() {
+        // add invalid values to params object
+		populateInValidParams(params)
+		// attempt to save invalid data
         controller.save()
+		
+        if (debug) { println controller.flash.message }
+		if (debug) { println "model:$model" }		
+		//assert model.ingredientInstance != null
 
-        assert model.ingredientInstance != null
+   		if (debug) { println "view:$view" }
         assert view == '/ingredient/create'
 
         response.reset()
@@ -105,15 +122,16 @@ class IngredientControllerTests {
 
         // test invalid parameters in update
         params.id = ingredient.id
-        //TODO: add invalid values to params object
-
+        // add invalid values to params object
+		populateInValidParams(params)
+		
         controller.update()
 
         assert view == "/ingredient/edit"
         assert model.ingredientInstance != null
 
         ingredient.clearErrors()
-
+		
         populateValidParams(params)
         controller.update()
 

@@ -37,12 +37,13 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-		test ":spock:0.6"
 		compile ":nutrient-data:0.3.2"
-		compile ":codenarc:0.17"
 		compile ":jquery-mobile:1.1.0.5"
 		compile ":jquery-mobile-scaffolding:0.1"
 
+		test ":spock:0.6"
+		test ":code-coverage:1.2.5"
+		test ":codenarc:0.17"
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.7.1"
         runtime ":resources:1.1.6"
@@ -55,3 +56,15 @@ grails.project.dependency.resolution = {
         build ":tomcat:$grailsVersion"
     }
 }
+
+codenarc.reports = {
+	JenkinsXmlReport('xml') {
+		outputFile = 'target/test-reports/CodeNarcReport.xml'
+		title = 'CodeNarc Report for Meal Tracker Mobile'
+	}
+	JenkinsHtmlReport('html') {
+		outputFile = 'CodeNarcReport.html'
+		title = 'CodeNarc Report for Meal Tracker Mobile'
+	}
+}
+codenarc.propertiesFile = 'grails-app/conf/codenarc.properties'
