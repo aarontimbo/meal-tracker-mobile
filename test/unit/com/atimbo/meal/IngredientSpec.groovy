@@ -18,11 +18,11 @@ class IngredientSpec extends UnitSpec {
 		def foodWeight = new Weight(food: food, sequenceNumber: 1, amount: 1.0, description: unit, gramWeight: 133.0).save()
 
 		when:
-		new Ingredient(foodWeight: foodWeight).save()
+		def ingredientInstance = new Ingredient(foodWeight: foodWeight).save()
 		
 		then:
-		Ingredient.findByFoodWeight(foodWeight) != null
-		if (debug) { println "So glad we made it..." }
+		assert ingredientInstance
+		if (debug) { println "Ingredient created: $ingredientInstance" }
 
 		where:
 		description = "parsnip"
