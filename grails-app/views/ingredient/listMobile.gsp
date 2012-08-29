@@ -10,17 +10,23 @@
 	</head>
 	<body>
 		<div data-role="page">
-			<div data-role="header">Ingredients</div>
+			<div data-role="header" >
+				<h1>Ingredients</h1>
+			</div>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<div data-role="content">
-				<g:link data-role="button" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
-				<ul data-role="listview" data-theme="b">
-					<g:each in="${ingredientInstanceList}" status="i" var="ingredientInstance">
-						<li>${ingredientInstance}</li>
-					</g:each>
-				</ul>
+				<div>
+					<g:link data-role="button" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+				</div>
+				<div class="page-list">
+					<ul data-role="listview" data-theme="g">
+						<g:each in="${ingredientInstanceList}" status="i" var="ingredientInstance">
+							<li>${ingredientInstance}</li>
+						</g:each>
+					</ul>
+				</div>
 			
 			</div>
 		</div>

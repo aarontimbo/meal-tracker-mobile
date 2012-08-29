@@ -201,7 +201,9 @@ img {
 .nav a.create {
 	background-image: url(../images/skin/database_add.png);
 }
-
+.page-list {
+	padding-top: 1.0em;
+}
 /* CREATE/EDIT FORMS AND SHOW PAGES */
 
 fieldset,
