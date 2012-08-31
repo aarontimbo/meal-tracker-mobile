@@ -32,14 +32,12 @@ class Ingredient {
 		 */
 	Integer sortOrder = 1
 	
+	static belongsTo = [ recipe: Recipe ]
+	
 	String toString() { foodWeight ? "$servings x $foodWeight $foodWeight.food" : description }
 	
     static constraints = {
 		description nullable: true
 		foodWeight nullable: true		
     }
-	
-	static mapping = {
-		sort "sortOrder"		
-	}
 }
