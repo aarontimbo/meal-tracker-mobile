@@ -5,7 +5,7 @@ class Recipe {
 	String description
 	String notes
 	
-	static hasMany = [ ingredients: Ingredient, instructions: Instruction ]
+	static hasMany = [ ingredients: RecipeIngredient, instructions: RecipeInstruction ]
 	
 	String toString() { title }
 	

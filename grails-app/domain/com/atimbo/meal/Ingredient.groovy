@@ -31,13 +31,19 @@ class Ingredient {
 		ingredients list. 
 		 */
 	Integer sortOrder = 1
-	
-	static belongsTo = [ recipe: Recipe ]
-	
+		
 	String toString() { foodWeight ? "$servings x $foodWeight $foodWeight.food" : description }
 	
+	/**
+	This is a custom validator that requires that either a food
+	description or food weight be specified for the ingredient. 
+	 */
+	static requireDescriptionOrFoodWeightValidator = { val, obj ->
+		return ( obj.properties['description'] || obj.properties['foodWeight'] )
+	}
+	
     static constraints = {
-		description nullable: true
-		foodWeight nullable: true		
+		description nullable: true, validator: requireDescriptionOrFoodWeightValidator
+		foodWeight nullable: true, validator: requireDescriptionOrFoodWeightValidator		
     }
 }
