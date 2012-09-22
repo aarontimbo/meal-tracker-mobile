@@ -19,12 +19,6 @@ class Ingredient {
 		database.
 		 */
 	Weight foodWeight
-		/**
-		Number of servings as it
-		relates to the food weight
-		item.
-		 */
-	Float servings = 1
 		/** 
 		Used to display ingredient
 		in proper order on a recipe
@@ -32,7 +26,7 @@ class Ingredient {
 		 */
 	Integer sortOrder = 1
 		
-	String toString() { foodWeight ? "$servings x $foodWeight $foodWeight.food" : description }
+	String toString() { foodWeight ? "$foodWeight $foodWeight.food" : description }
 	
 	/**
 	This is a custom validator that requires that either a food

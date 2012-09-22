@@ -19,7 +19,7 @@ class Recipe {
 		notes type: 'text'
 	}
 	
-	static transients = [ 'sortedIngredients', 'sortedIngredients']
+	static transients = [ 'sortedIngredients', 'sortedInstructions']
 	
 	def getSortedIngredients = {
 		ingredients.sort { sortOrder }	

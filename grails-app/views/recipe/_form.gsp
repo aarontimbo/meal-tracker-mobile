@@ -1,5 +1,5 @@
 <%@ page import="com.atimbo.meal.Recipe" %>
-
+<%@ page import="com.atimbo.meal.Ingredient" %>
 
 
 <div class="fieldcontain ${hasErrors(bean: recipeInstance, field: 'title', 'error')} ">
@@ -33,10 +33,13 @@
 	</label>
 	
 <ul class="one-to-many">
-<g:each in="${recipeInstance?.ingredients?}" var="i">
+<g:each in="${recipeInstance?.ingredients?.sort{ sortOrder }}" var="i">
     <li><g:link controller="ingredient" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></li>
 </g:each>
 <li class="add">
+<g:if test="${Ingredient.list()}" >
+	<g:select name="ingredient" from="${Ingredient.list()}" optionKey="id" />
+</g:if>
 <g:link controller="ingredient" action="create" params="['recipe.id': recipeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'ingredient.label', default: 'Ingredient')])}</g:link>
 </li>
 </ul>

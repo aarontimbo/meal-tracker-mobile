@@ -7,6 +7,7 @@ class RecipeIngredient {
 	*/
 	Integer sortOrder = 1
 	Ingredient ingredient
+	Float servings = 1.0
  
 	static belongsTo = [ recipe: Recipe ]
 	

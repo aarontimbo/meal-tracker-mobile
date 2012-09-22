@@ -24,13 +24,20 @@ class RecipeController {
         [recipeInstance: new Recipe(params)]
     }
 
+	def createMobile() {
+		[recipeInstance: new Recipe(params)]
+	}
+
     def save() {
         def recipeInstance = new Recipe(params)
         if (!recipeInstance.save(flush: true)) {
             render(view: "create", model: [recipeInstance: recipeInstance])
             return
         }
-
+		// TODO: Add recipe ingredients using selected ingredients added dynamically
+		
+		// TODO: Add autocomplete fields for ingredients and instructions to allow for selecting and
+		// adding new items. Will need to allow for doing this repeatedly
 		flash.message = message(code: 'default.created.message', args: [message(code: 'recipe.label', default: 'Recipe'), recipeInstance.id])
         redirect(action: "show", id: recipeInstance.id)
     }
@@ -45,6 +52,18 @@ class RecipeController {
 
         [recipeInstance: recipeInstance]
     }
+
+	
+	def showMobile() {
+		def recipeInstance = Recipe.get(params.id)
+		if (!recipeInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'recipe.label', default: 'Recipe'), params.id])
+			redirect(action: "list")
+			return
+		}
+
+		[recipeInstance: recipeInstance]
+	}
 
     def edit() {
         def recipeInstance = Recipe.get(params.id)

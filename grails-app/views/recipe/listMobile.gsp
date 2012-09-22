@@ -10,16 +10,16 @@
 	<body>
 		<div data-role="page">
 			<div data-role="header" >
-				<h1>Ingredients</h1>
+				<h1>Recipes</h1>
 			</div>
 			<div data-role="content">
 				<div>
-					<g:link data-role="button" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+					<g:link data-role="button" action="createMobile"><g:message code="default.new.label" args="[entityName]" /></g:link>
 				</div>
 				<div class="page-list">
 					<ul data-role="listview" data-theme="g">
 						<g:each in="${recipeInstanceList}" status="i" var="recipeInstance">
-							<li>${recipeInstance}</li>
+							<li><g:link action="showMobile" id="${recipeInstance.id}">${recipeInstance}</g:link></li>
 						</g:each>
 					</ul>
 				</div>
