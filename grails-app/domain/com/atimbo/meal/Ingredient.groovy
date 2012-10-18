@@ -19,12 +19,6 @@ class Ingredient {
 		database.
 		 */
 	Weight foodWeight
-		/** 
-		Used to display ingredient
-		in proper order on a recipe
-		ingredients list. 
-		 */
-	Integer sortOrder = 1
 		
 	String toString() { foodWeight ? "$foodWeight $foodWeight.food" : description }
 	

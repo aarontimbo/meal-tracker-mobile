@@ -39,7 +39,8 @@ class RecipeController {
 		// TODO: Add autocomplete fields for ingredients and instructions to allow for selecting and
 		// adding new items. Will need to allow for doing this repeatedly
 		flash.message = message(code: 'default.created.message', args: [message(code: 'recipe.label', default: 'Recipe'), recipeInstance.id])
-        redirect(action: "show", id: recipeInstance.id)
+        //redirect(action: "show", id: recipeInstance.id)
+        redirect(action: "showMobile", id: recipeInstance.id)
     }
 
     def show() {
@@ -70,6 +71,17 @@ class RecipeController {
         if (!recipeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'recipe.label', default: 'Recipe'), params.id])
             redirect(action: "list")
+            return
+        }
+
+        [recipeInstance: recipeInstance]
+    }
+
+    def editMobile() {
+        def recipeInstance = Recipe.get(params.id)
+        if (!recipeInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'recipe.label', default: 'Recipe'), params.id])
+            redirect(action: "listMobile")
             return
         }
 

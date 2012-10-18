@@ -40,7 +40,8 @@ grails.project.dependency.resolution = {
 		compile ":nutrient-data:0.3.2"
 		compile ":jquery-mobile:1.1.0.5"
 		compile ":jquery-mobile-scaffolding:0.1"
-
+		compile ":jquery-ui:1.8.15"
+		
 		test ":spock:0.6"
 		test ":code-coverage:1.2.5"
 		test ":codenarc:0.17"
